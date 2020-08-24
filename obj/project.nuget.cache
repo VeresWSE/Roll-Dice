@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "u8AwClRufJkmGXpChHLBtkVrJn3coisNmN+mMu+BRcM5C55sFMCOwGCNtfQ4VqTWOJLe4iZjMxErQRS58sZClg==",
+  "dgSpecHash": "TLutkuFhjlKBqcmf9UWA0NZnST63uP16DNVl9NYev6tiHZWs6mVKd0Cr8cNd6IXiorFbroWTUBoBHgzJoO6/sg==",
   "success": true,
-  "projectFilePath": "D:\\Projekty C#\\RollAndDice\\RollAndDice\\RollAndDice.csproj",
+  "projectFilePath": "C:\\Users\\Lenovo\\RiderProjects\\Roll-Dice\\RollAndDice.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
