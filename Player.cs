@@ -1,5 +1,6 @@
 ﻿using System;
 using static System.Console;
+
 public class Player
 {
 	protected string playerName;

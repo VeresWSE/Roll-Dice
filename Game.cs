@@ -1,7 +1,7 @@
 ﻿using System;
 using static System.Console;
 
-public class Game
+public class Game : AbstractGame
 {
 	GamesRecord gamesRecord;
 	Player playerOne;
@@ -23,7 +23,7 @@ public class Game
     int RollPlayerOneSum = 0;
     int RollPlayerTwoSum = 0;
 
-    void MainMenuLoop()
+    protected override void MainMenuLoop()
     {
 
         ConsoleKeyInfo inputKey;
@@ -174,5 +174,4 @@ public class Game
 
         }
     }
-
 }
