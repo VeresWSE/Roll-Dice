@@ -6,6 +6,8 @@ using static System.Console;
 
 class RollDice
 {
+    static int RollPlayerOneSum = 0;
+    static int RollPlayerTwoSum = 0;
     static void DisplayWelcomeMesssage()
     {
         WriteLine("No siema");
@@ -26,6 +28,8 @@ class RollDice
         while (playGame)
         {
             Random rnd = new Random();
+            RollPlayerOneSum = 0;
+            RollPlayerTwoSum = 0;
 
             for (int i = 0; i < numbers1.Length; i++)
             {
@@ -59,15 +63,15 @@ class RollDice
                 WriteLine("Press correct key");
             }
             WriteLine("Player 1, press A to re-roll dice 1 or press any other key to skip.");
-            RerollPlayer1(rnd, numbers1, ConsoleKey.A, 0);
+            RerollPlayer(rnd, numbers1, ConsoleKey.A, 0);
             WriteLine("Player 1, press S to re-roll dice 2 or press any other key to skip.");
-            RerollPlayer1(rnd, numbers1, ConsoleKey.S, 1);
+            RerollPlayer(rnd, numbers1, ConsoleKey.S, 1);
             WriteLine("Player 1, press D to re-roll dice 3 or press any other key to skip.");
-            RerollPlayer1(rnd, numbers1, ConsoleKey.D, 2);
+            RerollPlayer(rnd, numbers1, ConsoleKey.D, 2);
             WriteLine("Player 1, press F to re-roll dice 4 or press any other key to skip.");
-            RerollPlayer1(rnd, numbers1, ConsoleKey.F, 3);
+            RerollPlayer(rnd, numbers1, ConsoleKey.F, 3);
             WriteLine("Player 1, press G to re-roll dice 5 or press any other key to skip.");
-            RerollPlayer1(rnd, numbers1, ConsoleKey.G, 4);
+            RerollPlayer(rnd, numbers1, ConsoleKey.G, 4);
 
             foreach (var nr in numbers1)
             {
@@ -75,27 +79,26 @@ class RollDice
             }
             WriteLine();
             WriteLine("Player 2, press A to re-roll dice 1 or press any other key to skip.");
-            RerollPlayer2(rnd, numbers2, ConsoleKey.A, 0);
+            RerollPlayer(rnd, numbers2, ConsoleKey.A, 0);
             WriteLine("Player 2, press S to re-roll dice 2 or press any other key to skip.");
-            RerollPlayer2(rnd, numbers2, ConsoleKey.S, 1);
+            RerollPlayer(rnd, numbers2, ConsoleKey.S, 1);
             WriteLine("Player 2, press D to re-roll dice 3 or press any other key to skip.");
-            RerollPlayer2(rnd, numbers2, ConsoleKey.D, 2);
+            RerollPlayer(rnd, numbers2, ConsoleKey.D, 2);
             WriteLine("Player 2, press F to re-roll dice 4 or press any other key to skip.");
-            RerollPlayer2(rnd, numbers2, ConsoleKey.F, 3);
+            RerollPlayer(rnd, numbers2, ConsoleKey.F, 3);
             WriteLine("Player 2, press G to re-roll dice 5 or press any other key to skip.");
-            RerollPlayer2(rnd, numbers2, ConsoleKey.G, 4);
+            RerollPlayer(rnd, numbers2, ConsoleKey.G, 4);
             foreach (var nr in numbers2)
             {
                 WriteLine(nr + " ");
             }
 
-                int RollPlayerOneSum = 0;
-                int RollPlayerTwoSum = 0;
-                for (int i = 0; i < numbers1.Length; i++)
-                {
-                    RollPlayerOneSum += numbers1[i];
-                }
-                WriteLine(RollPlayerOneSum);
+
+            for (int i = 0; i < numbers1.Length; i++)
+            {
+                RollPlayerOneSum += numbers1[i];
+            }
+            WriteLine(RollPlayerOneSum);
             gamesRecord[GamesRecordCurrentIndex, 0] = RollPlayerOneSum.ToString();
             for (int i = 0; i < numbers2.Length; i++)
             {
@@ -103,33 +106,11 @@ class RollDice
             }
             WriteLine(RollPlayerTwoSum);
             gamesRecord[GamesRecordCurrentIndex, 1] = RollPlayerTwoSum.ToString();
+            DetermineWinner(gamesRecord, GamesRecordCurrentIndex);
 
-            if (RollPlayerOneSum > RollPlayerTwoSum)
-            {
-                gamesRecord[GamesRecordCurrentIndex, 2] = "Player 1";
-                WriteLine("Player 1 wins");
-            }
-            else if (RollPlayerOneSum<RollPlayerTwoSum)
-            {
-                gamesRecord[GamesRecordCurrentIndex, 2] = "Player 2";
-                WriteLine("Player 2 wins");
-            }
-            else
-            {
-                gamesRecord[GamesRecordCurrentIndex, 2] = "Draw";
-                WriteLine("Draw");
-            }
+            GamesRecordCurrentIndex += 1;
 
-
-           GamesRecordCurrentIndex += 1;
-
-
-            WriteLine("Results");
-            for (int i=0; i<GamesRecordCurrentIndex; i++)
-            {
-                WriteLine("Game #{0}: {1} - {2}, won {3}", i + 1, gamesRecord[i, 0], gamesRecord[i, 1], gamesRecord[i, 2]);
-            }
-
+            WriteResult(gamesRecord, GamesRecordCurrentIndex);
 
             WriteLine("Do you want to finish? [y]");
 
@@ -142,26 +123,45 @@ class RollDice
         }
     }
 
-
-
-    private static void RerollPlayer2(Random rnd, int[] numbers2, ConsoleKey key, int index)
-{
-    if (ReadKey().Key == key)
+    private static void WriteResult(string[,] gamesRecord, int GamesRecordCurrentIndex)
     {
-        numbers2[index] = rnd.Next(1, 7);
-        WriteLine();
-
+        WriteLine("Results");
+        for (int i = 0; i < GamesRecordCurrentIndex; i++)
+        {
+            WriteLine("Game #{0}: {1} - {2}, won {3}", i + 1, gamesRecord[i, 0], gamesRecord[i, 1], gamesRecord[i, 2]);
+        }
     }
-}
 
-private static void RerollPlayer1(Random rnd, int[] numbers1, ConsoleKey key, int index)
-{
-    if (ReadKey().Key == key)
+    private static void DetermineWinner(string[,] gamesRecord, int GamesRecordCurrentIndex)
     {
-        numbers1[index] = rnd.Next(1, 7);
-        WriteLine();
-
+        if (RollPlayerOneSum > RollPlayerTwoSum)
+        {
+            gamesRecord[GamesRecordCurrentIndex, 2] = "Player 1";
+            WriteLine("Player 1 wins");
+        }
+        else if (RollPlayerOneSum < RollPlayerTwoSum)
+        {
+            gamesRecord[GamesRecordCurrentIndex, 2] = "Player 2";
+            WriteLine("Player 2 wins");
+        }
+        else
+        {
+            gamesRecord[GamesRecordCurrentIndex, 2] = "Draw";
+            WriteLine("Draw");
+        }
     }
+
+    private static void RerollPlayer(Random rnd, int[] numbers, ConsoleKey key, int index)
+    {
+        if (ReadKey().Key == key)
+        {
+            numbers[index] = rnd.Next(1, 7);
+            WriteLine();
+
+        }
+    }
+
+
 }
-}
+
 
