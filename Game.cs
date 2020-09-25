@@ -9,7 +9,7 @@ public class Game
 
 	public Game()
 	{
-		gamesRecord = new GamesRecord(15);
+		gamesRecord = new GamesRecord(-1);
 		playerOne = new Player();
 		playerTwo = new Player();
         MainMenuLoop();
@@ -67,7 +67,7 @@ public class Game
             numbers2[i] = rnd.Next(1, 7);
         }
 
-        WriteLine(playerOne.playerName + ", press Enter to Roll&Dice!");
+        WriteLine(playerOne.PlayerName + ", press Enter to Roll&Dice!");
         while (ReadKey().Key != ConsoleKey.Enter)
         {
             WriteLine("Press correct key");
@@ -76,7 +76,7 @@ public class Game
         {
             WriteLine(nr + " ");
         }
-        WriteLine(playerTwo.playerName + ", press Enter to Roll&Dice!");
+        WriteLine(playerTwo.PlayerName + ", press Enter to Roll&Dice!");
         while (ReadKey().Key != ConsoleKey.Enter)
         {
             WriteLine("Press correct key");
@@ -92,15 +92,15 @@ public class Game
         {
             WriteLine("Press correct key");
         }
-        WriteLine(playerOne.playerName + ", press A to re-roll dice 1 or press any other key to skip.");
+        WriteLine(playerOne.PlayerName + ", press A to re-roll dice 1 or press any other key to skip.");
         RerollPlayer(rnd, numbers1, ConsoleKey.A, 0);
-        WriteLine(playerOne.playerName + ", press S to re-roll dice 2 or press any other key to skip.");
+        WriteLine(playerOne.PlayerName + ", press S to re-roll dice 2 or press any other key to skip.");
         RerollPlayer(rnd, numbers1, ConsoleKey.S, 1);
-        WriteLine(playerOne.playerName + ", press D to re-roll dice 3 or press any other key to skip.");
+        WriteLine(playerOne.PlayerName + ", press D to re-roll dice 3 or press any other key to skip.");
         RerollPlayer(rnd, numbers1, ConsoleKey.D, 2);
-        WriteLine(playerOne.playerName + ", press F to re-roll dice 4 or press any other key to skip.");
+        WriteLine(playerOne.PlayerName + ", press F to re-roll dice 4 or press any other key to skip.");
         RerollPlayer(rnd, numbers1, ConsoleKey.F, 3);
-        WriteLine(playerOne.playerName + ", press G to re-roll dice 5 or press any other key to skip.");
+        WriteLine(playerOne.PlayerName + ", press G to re-roll dice 5 or press any other key to skip.");
         RerollPlayer(rnd, numbers1, ConsoleKey.G, 4);
 
         foreach (var nr in numbers1)
@@ -108,15 +108,15 @@ public class Game
             WriteLine(nr + " ");
         }
         WriteLine();
-        WriteLine(playerTwo.playerName + ", press A to re-roll dice 1 or press any other key to skip.");
+        WriteLine(playerTwo.PlayerName + ", press A to re-roll dice 1 or press any other key to skip.");
         RerollPlayer(rnd, numbers2, ConsoleKey.A, 0);
-        WriteLine(playerTwo.playerName + ", press S to re-roll dice 2 or press any other key to skip.");
+        WriteLine(playerTwo.PlayerName + ", press S to re-roll dice 2 or press any other key to skip.");
         RerollPlayer(rnd, numbers2, ConsoleKey.S, 1);
-        WriteLine(playerTwo.playerName + ", press D to re-roll dice 3 or press any other key to skip.");
+        WriteLine(playerTwo.PlayerName + ", press D to re-roll dice 3 or press any other key to skip.");
         RerollPlayer(rnd, numbers2, ConsoleKey.D, 2);
-        WriteLine(playerTwo.playerName + ", press F to re-roll dice 4 or press any other key to skip.");
+        WriteLine(playerTwo.PlayerName + ", press F to re-roll dice 4 or press any other key to skip.");
         RerollPlayer(rnd, numbers2, ConsoleKey.F, 3);
-        WriteLine(playerTwo.playerName + ", press G to re-roll dice 5 or press any other key to skip.");
+        WriteLine(playerTwo.PlayerName + ", press G to re-roll dice 5 or press any other key to skip.");
         RerollPlayer(rnd, numbers2, ConsoleKey.G, 4);
         foreach (var nr in numbers2)
         {
@@ -150,13 +150,13 @@ public class Game
     {
         if (RollPlayerOneSum > RollPlayerTwoSum)
         {
-            WriteLine(playerOne.playerName + " wins");
-            return playerOne.playerName;
+            WriteLine(playerOne.PlayerName + " wins");
+            return playerOne.PlayerName;
         }
         else if (RollPlayerOneSum < RollPlayerTwoSum)
         {
-            WriteLine(playerTwo.playerName + " wins");
-            return playerTwo.playerName;
+            WriteLine(playerTwo.PlayerName + " wins");
+            return playerTwo.PlayerName;
         }
         else
         {

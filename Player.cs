@@ -2,7 +2,20 @@
 using static System.Console;
 public class Player
 {
-	public string playerName;
+	protected string playerName;
+
+	public string PlayerName
+	{
+		get
+		{
+			return playerName;
+		}
+		set
+		{
+			playerName = value;
+		}
+	}
+
 	public Player(string playerName)
 	{
 		this.playerName = playerName;
@@ -15,7 +28,7 @@ public class Player
 	public void SetPlayerName()
 	{
 		Write("Please enter player name: ");
-		playerName = ReadLine();
+		PlayerName = ReadLine();
 	}
 
 }
