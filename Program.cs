@@ -6,27 +6,60 @@ using static System.Console;
 
 class RollDice
 {
+    static int gamesRecordSize = 10;
+    static string[,] gamesRecord = new string[gamesRecordSize, 3];
+    static int GamesRecordCurrentIndex = 0;
+
     static int RollPlayerOneSum = 0;
     static int RollPlayerTwoSum = 0;
+
+    static void MainMenuLoop()
+    {
+        ConsoleKeyInfo inputKey;
+        do
+        {
+            Clear();
+            WriteLine("Roll&Dice Menu:\n\t[1] Play game\n\t[2] Show rules\n\t[3] Display last games' record\n\t[ESC] Exit");
+            inputKey = ReadKey(true);
+
+            if (inputKey.Key == ConsoleKey.D1)
+            {
+                GameLoop();
+            }
+            else if (inputKey.Key == ConsoleKey.D2)
+            {
+                DisplayWelcomeMesssage();
+            }
+            else if (inputKey.Key == ConsoleKey.D3)
+            {
+                WriteResult();
+            }
+
+        } while (inputKey.Key != ConsoleKey.Escape);
+
+    }
+
+
     static void DisplayWelcomeMesssage()
     {
         WriteLine("No siema");
+        WriteLine("Click any key to continue");
+        ReadKey(true);
     }
+
     public static void Main(string[] args)
     {
-        int gamesRecordSize = 10;
-        string[,] gamesRecord = new string[gamesRecordSize, 3];
-        int GamesRecordCurrentIndex = (GamesRecordCurrentIndex = 0) % gamesRecordSize;
+        MainMenuLoop();
+    }
 
-
+    private static void GameLoop()
+    {
         bool playGame = true;
         int[] numbers1 = new int[5];
         int[] numbers2 = new int[5];
 
-        DisplayWelcomeMesssage();
 
-        while (playGame)
-        {
+            GamesRecordCurrentIndex = GamesRecordCurrentIndex % gamesRecordSize;
             Random rnd = new Random();
             RollPlayerOneSum = 0;
             RollPlayerTwoSum = 0;
@@ -106,33 +139,35 @@ class RollDice
             }
             WriteLine(RollPlayerTwoSum);
             gamesRecord[GamesRecordCurrentIndex, 1] = RollPlayerTwoSum.ToString();
-            DetermineWinner(gamesRecord, GamesRecordCurrentIndex);
+            DetermineWinner();
 
             GamesRecordCurrentIndex += 1;
 
-            WriteResult(gamesRecord, GamesRecordCurrentIndex);
 
-            WriteLine("Do you want to finish? [y]");
-
-            if (ReadKey().Key == ConsoleKey.Y)
-            {
-                playGame = false;
-            }
-
+        WriteLine("Do you want to play another round? [y]");
+        if (ReadKey(true).Key == ConsoleKey.Y)
+        {
             Clear();
+            GameLoop();
         }
-    }
 
-    private static void WriteResult(string[,] gamesRecord, int GamesRecordCurrentIndex)
+
+        Clear();
+        }
+    
+
+    private static void WriteResult()
     {
         WriteLine("Results");
         for (int i = 0; i < GamesRecordCurrentIndex; i++)
         {
             WriteLine("Game #{0}: {1} - {2}, won {3}", i + 1, gamesRecord[i, 0], gamesRecord[i, 1], gamesRecord[i, 2]);
         }
+        WriteLine("Click any key to continue");
+        ReadKey(true);
     }
 
-    private static void DetermineWinner(string[,] gamesRecord, int GamesRecordCurrentIndex)
+    private static void DetermineWinner()
     {
         if (RollPlayerOneSum > RollPlayerTwoSum)
         {
