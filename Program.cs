@@ -6,15 +6,14 @@ using static System.Console;
 
 class RollDice
 {
-    static int gamesRecordSize = 10;
-    static string[,] gamesRecord = new string[gamesRecordSize, 3];
-    static int GamesRecordCurrentIndex = 0;
+
 
     static int RollPlayerOneSum = 0;
     static int RollPlayerTwoSum = 0;
 
     static void MainMenuLoop()
     {
+        GamesRecord gamesRecord = new GamesRecord(15);
         Player playerOne = new Player();
         Player playerTwo = new Player();
         ConsoleKeyInfo inputKey;
@@ -26,7 +25,7 @@ class RollDice
 
             if (inputKey.Key == ConsoleKey.D1)
             {
-                GameLoop(playerOne.playerName, playerTwo.playerName);
+                GameLoop(playerOne.playerName, playerTwo.playerName, gamesRecord);
             }
             else if (inputKey.Key == ConsoleKey.D2)
             {
@@ -34,7 +33,7 @@ class RollDice
             }
             else if (inputKey.Key == ConsoleKey.D3)
             {
-                WriteResult();
+                gamesRecord.WriteResult();
             }
 
         } while (inputKey.Key != ConsoleKey.Escape);
@@ -51,19 +50,19 @@ class RollDice
 
     public static void Main(string[] args)
     {
-        GamesRecord gamesRecord = new GamesRecord(15);
+        
 
         MainMenuLoop();
     }
 
-    private static void GameLoop(string playerOneName, string playerTwoName)
+    private static void GameLoop(string playerOneName, string playerTwoName, GamesRecord gamesRecord)
     {
         bool playGame = true;
         int[] numbers1 = new int[5];
         int[] numbers2 = new int[5];
 
 
-            GamesRecordCurrentIndex = GamesRecordCurrentIndex % gamesRecordSize;
+            
             Random rnd = new Random();
             RollPlayerOneSum = 0;
             RollPlayerTwoSum = 0;
@@ -136,23 +135,19 @@ class RollDice
                 RollPlayerOneSum += numbers1[i];
             }
             WriteLine(RollPlayerOneSum);
-            gamesRecord[GamesRecordCurrentIndex, 0] = RollPlayerOneSum.ToString();
             for (int i = 0; i < numbers2.Length; i++)
             {
                 RollPlayerTwoSum += numbers2[i];
             }
             WriteLine(RollPlayerTwoSum);
-            gamesRecord[GamesRecordCurrentIndex, 1] = RollPlayerTwoSum.ToString();
-            DetermineWinner(playerOneName, playerTwoName);
-
-            GamesRecordCurrentIndex += 1;
+        gamesRecord.AddRecord(RollPlayerOneSum.ToString(), RollPlayerTwoSum.ToString(), DetermineWinner(playerOneName, playerTwoName));
 
 
         WriteLine("Do you want to play another round? [y]");
         if (ReadKey(true).Key == ConsoleKey.Y)
         {
             Clear();
-            GameLoop(playerOneName, playerTwoName);
+            GameLoop(playerOneName, playerTwoName, gamesRecord);
         }
 
 
@@ -160,33 +155,24 @@ class RollDice
         }
     
 
-    private static void WriteResult()
-    {
-        WriteLine("Results");
-        for (int i = 0; i < GamesRecordCurrentIndex; i++)
-        {
-            WriteLine("Game #{0}: {1} - {2}, won {3}", i + 1, gamesRecord[i, 0], gamesRecord[i, 1], gamesRecord[i, 2]);
-        }
-        WriteLine("Click any key to continue");
-        ReadKey(true);
-    }
+    
 
-    private static void DetermineWinner(string playerOneName, string playerTwoName)
+    private static string DetermineWinner(string playerOneName, string playerTwoName)
     {
         if (RollPlayerOneSum > RollPlayerTwoSum)
         {
-            gamesRecord[GamesRecordCurrentIndex, 2] = playerOneName;
             WriteLine(playerOneName + " wins");
+            return playerOneName;
         }
         else if (RollPlayerOneSum < RollPlayerTwoSum)
-        {
-            gamesRecord[GamesRecordCurrentIndex, 2] = playerTwoName;
+        { 
             WriteLine(playerTwoName + " wins");
+            return playerTwoName;
         }
         else
         {
-            gamesRecord[GamesRecordCurrentIndex, 2] = "Draw";
             WriteLine("Draw");
+            return "Draw";
         }
     }
 
