@@ -9,14 +9,14 @@ public class Game : AbstractGame
 
 	public Game()
 	{
-		gamesRecord = new GamesRecord(-1);
+		gamesRecord = new GamesRecord(10);
 		playerOne = new Player();
 		playerTwo = new Player();
         MainMenuLoop();
     }
 	void DisplayWelcomeMesssage()
 	{
-		WriteLine("No siema");
+		WriteLine("Hello there! Welcome to Retarded Roll&Dice! Rules are very easy: player, who has more points after two rounds, wins. If you are not satisfied after first roll, you can re-roll separated dices. Goog luck!");
 		WriteLine("Click any key to continue");
 		ReadKey(true);
 	}
@@ -134,7 +134,7 @@ public class Game : AbstractGame
             RollPlayerTwoSum += numbers2[i];
         }
         WriteLine(RollPlayerTwoSum);
-        gamesRecord.AddRecord(RollPlayerOneSum.ToString(), RollPlayerTwoSum.ToString(), DetermineWinner());
+        gamesRecord.AddRecord(new Record(RollPlayerOneSum.ToString(), RollPlayerTwoSum.ToString(), DetermineWinner()));
 
         WriteLine("Do you want to play another round? [y]");
         if (ReadKey(true).Key == ConsoleKey.Y)
