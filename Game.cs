@@ -16,7 +16,8 @@ public class Game : AbstractGame
     }
 	void DisplayWelcomeMesssage()
 	{
-		WriteLine("Hello there! Welcome to Retarded Roll&Dice! Rules are very easy: player, who has more points after two rounds, wins. If you are not satisfied after first roll, you can re-roll separated dices. Goog luck!");
+		WriteLine("Hello there! Welcome to Retarded Roll&Dice! Rules are very easy: player, who has more points after two rounds, wins." +
+            " If you are not satisfied after first roll, you can re-roll separated dices. Good luck!");
 		WriteLine("Click any key to continue");
 		ReadKey(true);
 	}
@@ -92,32 +93,32 @@ public class Game : AbstractGame
         {
             WriteLine("Press correct key");
         }
-        WriteLine(playerOne.PlayerName + ", press A to re-roll dice 1 or press any other key to skip.");
-        RerollPlayer(rnd, numbers1, ConsoleKey.A, 0);
-        WriteLine(playerOne.PlayerName + ", press S to re-roll dice 2 or press any other key to skip.");
-        RerollPlayer(rnd, numbers1, ConsoleKey.S, 1);
-        WriteLine(playerOne.PlayerName + ", press D to re-roll dice 3 or press any other key to skip.");
-        RerollPlayer(rnd, numbers1, ConsoleKey.D, 2);
-        WriteLine(playerOne.PlayerName + ", press F to re-roll dice 4 or press any other key to skip.");
-        RerollPlayer(rnd, numbers1, ConsoleKey.F, 3);
-        WriteLine(playerOne.PlayerName + ", press G to re-roll dice 5 or press any other key to skip.");
-        RerollPlayer(rnd, numbers1, ConsoleKey.G, 4);
+        WriteLine(playerOne.PlayerName + ", press 1 to re-roll dice 1 or press any other key to skip.");
+        RerollPlayer(rnd, numbers1, ConsoleKey.D1, 0);
+        WriteLine(playerOne.PlayerName + ", press 2 to re-roll dice 2 or press any other key to skip.");
+        RerollPlayer(rnd, numbers1, ConsoleKey.D2, 1);
+        WriteLine(playerOne.PlayerName + ", press 3 to re-roll dice 3 or press any other key to skip.");
+        RerollPlayer(rnd, numbers1, ConsoleKey.D3, 2);
+        WriteLine(playerOne.PlayerName + ", press 4 to re-roll dice 4 or press any other key to skip.");
+        RerollPlayer(rnd, numbers1, ConsoleKey.D4, 3);
+        WriteLine(playerOne.PlayerName + ", press 5 to re-roll dice 5 or press any other key to skip.");
+        RerollPlayer(rnd, numbers1, ConsoleKey.D5, 4);
 
         foreach (var nr in numbers1)
         {
             WriteLine(nr + " ");
         }
         WriteLine();
-        WriteLine(playerTwo.PlayerName + ", press A to re-roll dice 1 or press any other key to skip.");
-        RerollPlayer(rnd, numbers2, ConsoleKey.A, 0);
-        WriteLine(playerTwo.PlayerName + ", press S to re-roll dice 2 or press any other key to skip.");
-        RerollPlayer(rnd, numbers2, ConsoleKey.S, 1);
-        WriteLine(playerTwo.PlayerName + ", press D to re-roll dice 3 or press any other key to skip.");
-        RerollPlayer(rnd, numbers2, ConsoleKey.D, 2);
-        WriteLine(playerTwo.PlayerName + ", press F to re-roll dice 4 or press any other key to skip.");
-        RerollPlayer(rnd, numbers2, ConsoleKey.F, 3);
-        WriteLine(playerTwo.PlayerName + ", press G to re-roll dice 5 or press any other key to skip.");
-        RerollPlayer(rnd, numbers2, ConsoleKey.G, 4);
+        WriteLine(playerTwo.PlayerName + ", press 1 to re-roll dice 1 or press any other key to skip.");
+        RerollPlayer(rnd, numbers2, ConsoleKey.D1, 0);
+        WriteLine(playerTwo.PlayerName + ", press 2 to re-roll dice 2 or press any other key to skip.");
+        RerollPlayer(rnd, numbers2, ConsoleKey.D2, 1);
+        WriteLine(playerTwo.PlayerName + ", press 3 to re-roll dice 3 or press any other key to skip.");
+        RerollPlayer(rnd, numbers2, ConsoleKey.D3, 2);
+        WriteLine(playerTwo.PlayerName + ", press 4 to re-roll dice 4 or press any other key to skip.");
+        RerollPlayer(rnd, numbers2, ConsoleKey.D4, 3);
+        WriteLine(playerTwo.PlayerName + ", press 5 to re-roll dice 5 or press any other key to skip.");
+        RerollPlayer(rnd, numbers2, ConsoleKey.D5, 4);
         foreach (var nr in numbers2)
         {
             WriteLine(nr + " ");
