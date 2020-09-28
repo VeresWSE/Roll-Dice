@@ -3,24 +3,24 @@ using static System.Console;
 
 public class Game : AbstractGame
 {
-	GamesRecord gamesRecord;
-	Player playerOne;
-	Player playerTwo;
+    GamesRecord gamesRecord;
+    Player playerOne;
+    Player playerTwo;
 
-	public Game()
-	{
-		gamesRecord = new GamesRecord(10);
-		playerOne = new Player();
-		playerTwo = new Player();
+    public Game()
+    {
+        gamesRecord = new GamesRecord(10);
+        playerOne = new Player();
+        playerTwo = new Player();
         MainMenuLoop();
     }
-	void DisplayWelcomeMesssage()
-	{
-		WriteLine("Hello there! Welcome to Retarded Roll&Dice! Rules are very easy: player, who has more points after two rounds, wins." +
+    void DisplayWelcomeMesssage()
+    {
+        WriteLine("Hello there! Welcome to Retarded Roll&Dice! Rules are very easy: player, who has more points after two rounds, wins." +
             " If you are not satisfied after first roll, you can re-roll separated dices. Good luck!");
-		WriteLine("Click any key to continue");
-		ReadKey(true);
-	}
+        WriteLine("Click any key to continue");
+        ReadKey(true);
+    }
     int RollPlayerOneSum = 0;
     int RollPlayerTwoSum = 0;
 
@@ -57,7 +57,6 @@ public class Game : AbstractGame
         int[] numbers2 = new int[5];
 
 
-
         Random rnd = new Random();
         RollPlayerOneSum = 0;
         RollPlayerTwoSum = 0;
@@ -75,8 +74,9 @@ public class Game : AbstractGame
         }
         foreach (var nr in numbers1)
         {
-            WriteLine(nr + " ");
+            Write(nr + " ");
         }
+        WriteLine();
         WriteLine(playerTwo.PlayerName + ", press Enter to Roll&Dice!");
         while (ReadKey().Key != ConsoleKey.Enter)
         {
@@ -84,8 +84,10 @@ public class Game : AbstractGame
         }
         foreach (var nr in numbers2)
         {
-            WriteLine(nr + " ");
+            Write(nr + " ");
         }
+        WriteLine();
+
         WriteLine("Press Enter to start round 2");
 
 
@@ -93,6 +95,7 @@ public class Game : AbstractGame
         {
             WriteLine("Press correct key");
         }
+
         WriteLine(playerOne.PlayerName + ", press 1 to re-roll dice 1 or press any other key to skip.");
         RerollPlayer(rnd, numbers1, ConsoleKey.D1, 0);
         WriteLine(playerOne.PlayerName + ", press 2 to re-roll dice 2 or press any other key to skip.");
@@ -103,10 +106,11 @@ public class Game : AbstractGame
         RerollPlayer(rnd, numbers1, ConsoleKey.D4, 3);
         WriteLine(playerOne.PlayerName + ", press 5 to re-roll dice 5 or press any other key to skip.");
         RerollPlayer(rnd, numbers1, ConsoleKey.D5, 4);
-
+        WriteLine();
+        
         foreach (var nr in numbers1)
         {
-            WriteLine(nr + " ");
+            Write(nr + " ");
         }
         WriteLine();
         WriteLine(playerTwo.PlayerName + ", press 1 to re-roll dice 1 or press any other key to skip.");
@@ -119,22 +123,33 @@ public class Game : AbstractGame
         RerollPlayer(rnd, numbers2, ConsoleKey.D4, 3);
         WriteLine(playerTwo.PlayerName + ", press 5 to re-roll dice 5 or press any other key to skip.");
         RerollPlayer(rnd, numbers2, ConsoleKey.D5, 4);
+        WriteLine();
+
         foreach (var nr in numbers2)
         {
-            WriteLine(nr + " ");
+            Write(nr + " ");
+        }
+        WriteLine();
+        WriteLine("Press Enter to see results");
+        while (ReadKey().Key != ConsoleKey.Enter)
+        {
+            WriteLine("Press correct key");
         }
 
+        Clear();
 
         for (int i = 0; i < numbers1.Length; i++)
         {
             RollPlayerOneSum += numbers1[i];
         }
+        WriteLine();
         WriteLine(RollPlayerOneSum);
         for (int i = 0; i < numbers2.Length; i++)
         {
             RollPlayerTwoSum += numbers2[i];
         }
         WriteLine(RollPlayerTwoSum);
+
         gamesRecord.AddRecord(new Record(RollPlayerOneSum.ToString(), RollPlayerTwoSum.ToString(), DetermineWinner()));
 
         WriteLine("Do you want to play another round? [y]");
