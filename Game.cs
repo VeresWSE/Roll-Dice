@@ -66,7 +66,7 @@ public class Game : AbstractGame
             numbers1[i] = rnd.Next(1, 7);
             numbers2[i] = rnd.Next(1, 7);
         }
-
+        Clear();
         WriteLine(playerOne.PlayerName + ", press Enter to Roll&Dice!");
         while (ReadKey().Key != ConsoleKey.Enter)
         {
